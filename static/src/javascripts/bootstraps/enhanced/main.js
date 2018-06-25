@@ -383,6 +383,19 @@ const bootEnhanced = (): void => {
                 );
             }
 
+            if (config.get('page.contentType') === 'Audio') {
+                require.ensure(
+                    [],
+                    require => {
+                        bootstrapContext(
+                            'audio',
+                            require('common/modules/audio').init
+                        );
+                    },
+                    'audio'
+                );
+            }
+
             // Mark the end of synchronous execution.
             markTime('App End');
             catchErrorsWithContext([
